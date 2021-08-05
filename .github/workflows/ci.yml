@@ -47,11 +47,19 @@ jobs:
         with:
           name: dist
           path: dist
+          token: ${{ secrets.REPO_ACCESS_TOKEN }}
+          repository: the-iron-bank-of-braavos/poc-actions
+          ref: refs/heads/feature/workflow-dispatch
+          inputs: '{ "name":"Command Line User", "home":"CLI" }'
       - if: matrix.target == 'built' || github.event_name == 'pull_request'
         uses: actions/download-artifact@v2
         with:
           name: action.yml
           path: .
+          token: ${{ secrets.REPO_ACCESS_TOKEN }}
+          repository: the-iron-bank-of-braavos/poc-actions
+          ref: refs/heads/feature/workflow-dispatch
+          inputs: '{ "name":"Command Line User", "home":"CLI" }'
 
       - name: Test workflow dispatch
         uses: ./
