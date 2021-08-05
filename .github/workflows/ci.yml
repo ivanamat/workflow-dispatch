@@ -46,7 +46,6 @@ jobs:
           workflow_id: NestedWorkflow
           repository: the-iron-bank-of-braavos/poc-actions
           ref: refs/heads/feature/workflow-dispatch
-          inputs: "{\"name\":\"CommandLineUser\",\"home\":\"CLI\"}"
 
   package:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
