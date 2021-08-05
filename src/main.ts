@@ -2,7 +2,7 @@ import * as core from '@actions/core'
 import * as github from '@actions/github'
 import {inspect} from 'util'
 
-function run(): Promise<void> {
+async function run(): Promise<void> {
   try {
     const inputs = {
       token: core.getInput('token'),
@@ -17,7 +17,7 @@ function run(): Promise<void> {
 
     const octokit = github.getOctokit(inputs.token)
 
-    octokit.rest.actions.createWorkflowDispatch({
+    await octokit.rest.actions.createWorkflowDispatch({
         owner: owner,
         repo: repo,
         workflow_id: inputs.workflow_id,
