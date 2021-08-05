@@ -1,31 +1,31 @@
 {
-  "name": "workflow-dispatch",
+  "name": "repository-dispatch",
   "version": "1.0.0",
   "private": true,
-  "description": "Create a workflow dispatch event",
+  "description": "Create a repository dispatch event",
   "main": "lib/main.js",
   "scripts": {
+    "build": "tsc && ncc build",
     "format": "prettier --write '**/*.ts'",
     "format-check": "prettier --check '**/*.ts'",
-    "build": "tsc && ncc build",
     "lint": "eslint src/**/*.ts",
     "test": "jest --passWithNoTests"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ivanamat/workflow-dispatch.git"
+    "url": "git+https://github.com/peter-evans/repository-dispatch.git"
   },
   "keywords": [
     "actions",
-    "workflow",
+    "repository",
     "dispatch"
   ],
-  "author": "Iván Amat",
+  "author": "Peter Evans",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ivanamat/workflow-dispatch/issues"
+    "url": "https://github.com/peter-evans/repository-dispatch/issues"
   },
-  "homepage": "https://github.com/ivanamat/workflow-dispatch#readme",
+  "homepage": "https://github.com/peter-evans/repository-dispatch#readme",
   "dependencies": {
     "@actions/core": "1.4.0",
     "@actions/github": "5.0.0"
