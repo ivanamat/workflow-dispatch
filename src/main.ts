@@ -8,7 +8,8 @@ async function run(): Promise<void> {
       token: core.getInput('token'),
       repository: core.getInput('repository'),
       ref: core.getInput('ref'),
-      workflow_id: core.getInput('workflow_id')
+      workflow_id: core.getInput('workflow_id'),
+      workflow_inputs: core.getInput('inputs')
     }
     core.debug(`Inputs: ${inspect(inputs)}`)
 
@@ -20,7 +21,8 @@ async function run(): Promise<void> {
         owner: owner,
         repo: repo,
         ref: inputs.ref,
-        workflow_id: inputs.workflow_id
+        workflow_id: inputs.workflow_id,
+        inputs: JSON.parse(inputs.workflow_inputs)
     })
     
   } catch (error) {
