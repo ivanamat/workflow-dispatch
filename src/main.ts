@@ -2,7 +2,7 @@ import * as core from '@actions/core'
 import * as github from '@actions/github'
 import {inspect} from 'util'
 
-async function run(): Promise<void> {
+ function run(): Promise<void> {
   try {
     const inputs = {
       token: core.getInput('token'),
