@@ -23,7 +23,7 @@ async function run(): Promise<void> {
         ref: inputs.ref,
         workflow_id: inputs.workflow_id,
         inputs: JSON.parse(inputs.workflow_inputs)
-    });
+    })
     
   } catch (error) {
     core.debug(inspect(error))
@@ -32,8 +32,7 @@ async function run(): Promise<void> {
         'Repository not found, OR token has insufficient permissions.'
       )
     } else {
-      core.setFailed(error)
-      // core.setFailed(error.message)
+      core.setFailed(error.message)
     }
   }
 }
