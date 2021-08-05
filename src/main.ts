@@ -20,9 +20,7 @@ async function run(): Promise<void> {
     await octokit.rest.actions.createWorkflowDispatch({
         owner: owner,
         repo: repo,
-        ref: inputs.ref,
-        workflow_id: inputs.workflow_id,
-        inputs: JSON.parse(inputs.workflow_inputs)
+        workflow_id: inputs.workflow_id
     })
     
   } catch (error) {
