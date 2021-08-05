@@ -21,8 +21,7 @@ async function run(): Promise<void> {
         owner: owner,
         repo: repo,
         ref: inputs.ref,
-        workflow_id: inputs.workflow_id,
-        inputs: JSON.parse(inputs.workflow_inputs)
+        workflow_id: inputs.workflow_id
     });
     
   } catch (error) {
