@@ -43,6 +43,7 @@ jobs:
         uses: ./
         with:
           token: ${{ secrets.REPO_ACCESS_TOKEN }}
+          workflow_id: NestedWorkflow
           repository: the-iron-bank-of-braavos/poc-actions
           ref: refs/heads/feature/workflow-dispatch
           inputs: "{\"name\":\"CommandLineUser\",\"home\":\"CLI\"}"

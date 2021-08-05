@@ -29,7 +29,7 @@ async function run(): Promise<void> {
     core.debug(inspect(error))
     if (error.status == 404) {
       core.setFailed(
-        'Repository not found, OR token has insufficient permissions. WFI:'+inputs.workflow_inputs
+        'Repository not found, OR token has insufficient permissions.'
       )
     } else {
       core.setFailed(error.message)
