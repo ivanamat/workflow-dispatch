@@ -3,9 +3,6 @@ import * as github from '@actions/github'
 import {inspect} from 'util'
 
 async function run(): Promise<void> {
-    
-  console.log("Pene!");
-  
   try {
     const inputs = {
       token: core.getInput('token'),
