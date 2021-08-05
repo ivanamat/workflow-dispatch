@@ -13,9 +13,6 @@ inputs:
   ref:
     description: 'Branch, tag or commit.'
     default: ${{ github.ref }}
-  inputs:
-    description: 'JSON inputs with extra information about the webhook event that your action or worklow may use.'
-    default: '{}'
 runs:
   using: 'node12'
   main: 'dist/index.js'

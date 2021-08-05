@@ -43,10 +43,10 @@ jobs:
         uses: ./
         with:
           token: ${{ secrets.REPO_ACCESS_TOKEN }}
-          repository: "the-iron-bank-of-braavos/poc-actions"
-          workflow_id: "NestedWorkflow"
-          ref: "refs/heads/feature/workflow-dispatch"
-          inputs: "{\"name\":\"Command Line User\", \"home\":\"CLI\" }"
+          repository: the-iron-bank-of-braavos/poc-actions
+          workflow_id: NestedWorkflow
+          ref: refs/heads/feature/workflow-dispatch
+          #inputs: "{\"name\":\"Command Line User\", \"home\":\"CLI\" }"
 
   package:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
