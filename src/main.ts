@@ -12,8 +12,6 @@ async function run(): Promise<void> {
       workflow_inputs: core.getInput('inputs')
     }
     core.debug(`Inputs: ${inspect(inputs)}`)
-    console.log(inputs.workflow_inputs)
-    core.debug(`JSON: ${inspect(inputs.workflow_inputs)}`)
 
     const [owner, repo] = inputs.repository.split('/')
 
@@ -31,7 +29,7 @@ async function run(): Promise<void> {
     core.debug(inspect(error))
     if (error.status == 404) {
       core.setFailed(
-        'Repository not found, OR token has insufficient permissions.'
+        'Repository not found, OR token has insufficient permissions. WFI:'+workflow_inputs
       )
     } else {
       core.setFailed(error.message)
