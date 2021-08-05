@@ -44,17 +44,19 @@ function run() {
             const inputs = {
                 token: core.getInput('token'),
                 repository: core.getInput('repository'),
-                eventType: core.getInput('event-type'),
-                clientPayload: core.getInput('client-payload')
+                ref: core.getInput('ref'),
+                workflow_id: core.getInput('workflow_id'),
+                workflow_inputs: core.getInput('inputs')
             };
             core.debug(`Inputs: ${util_1.inspect(inputs)}`);
             const [owner, repo] = inputs.repository.split('/');
             const octokit = github.getOctokit(inputs.token);
-            yield octokit.rest.repos.createDispatchEvent({
+            yield octokit.rest.actions.createWorkflowDispatch({
                 owner: owner,
                 repo: repo,
-                event_type: inputs.eventType,
-                client_payload: JSON.parse(inputs.clientPayload)
+                workflow_id: inputs.workflow_id,
+                ref: inputs.ref,
+                inputs: JSON.parse(inputs.workflow_inputs)
             });
         }
         catch (error) {
