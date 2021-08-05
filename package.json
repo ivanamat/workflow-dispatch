@@ -5,9 +5,9 @@
   "description": "Create a workflow dispatch event",
   "main": "lib/main.js",
   "scripts": {
-    "build": "tsc && ncc build",
     "format": "prettier --write '**/*.ts'",
     "format-check": "prettier --check '**/*.ts'",
+    "build": "tsc && ncc build",
     "lint": "eslint src/**/*.ts",
     "test": "jest --passWithNoTests"
   },
