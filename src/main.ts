@@ -32,7 +32,8 @@ async function run(): Promise<void> {
         'Repository not found, OR token has insufficient permissions.'
       )
     } else {
-      core.setFailed(error.message)
+      core.setFailed(error)
+      // core.setFailed(error.message)
     }
   }
 }
