@@ -8,7 +8,8 @@ async function run(): Promise<void> {
       token: core.getInput('token'),
       repository: core.getInput('repository'),
       eventType: core.getInput('event-type'),
-      clientPayload: core.getInput('client-payload')
+      clientPayload: core.getInput('client-payload'),
+      inputs: core.getInput('inputs')
     }
     core.debug(`Inputs: ${inspect(inputs)}`)
 
@@ -20,7 +21,8 @@ async function run(): Promise<void> {
       owner: owner,
       repo: repo,
       event_type: inputs.eventType,
-      client_payload: JSON.parse(inputs.clientPayload)
+      client_payload: JSON.parse(inputs.clientPayload),
+      inputs: JSON.parse(inputs.inputs)
     })
   } catch (error) {
     core.debug(inspect(error))
