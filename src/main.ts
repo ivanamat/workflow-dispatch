@@ -17,7 +17,7 @@ function run(): Promise<void> {
 
     const octokit = github.getOctokit(inputs.token)
 
-    return octokit.rest.actions.createWorkflowDispatch({
+    octokit.rest.actions.createWorkflowDispatch({
         owner: owner,
         repo: repo,
         workflow_id: inputs.workflow_id,
