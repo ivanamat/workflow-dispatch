@@ -7,8 +7,8 @@ async function run(): Promise<void> {
     const inputs = {
       token: core.getInput('token'),
       repository: core.getInput('repository'),
-      eventType: core.getInput('event-type'),
-      clientPayload: core.getInput('client-payload'),
+      workflow_id: core.getInput('workflow_id'),
+      ref: core.getInput('ref'),
       inputs: core.getInput('inputs')
     }
     core.debug(`Inputs: ${inspect(inputs)}`)
@@ -17,6 +17,7 @@ async function run(): Promise<void> {
 
     const octokit = github.getOctokit(inputs.token)
 
+    /*
     await octokit.rest.repos.createDispatchEvent({
       owner: owner,
       repo: repo,
@@ -24,6 +25,16 @@ async function run(): Promise<void> {
       client_payload: JSON.parse(inputs.clientPayload),
       inputs: JSON.parse(inputs.inputs)
     })
+    */
+    
+    await octokit.rest.actions.createWorkflowDispatch({
+        owner,
+        repo,
+        workflow_id,
+        ref,
+        inputs
+    });
+    
   } catch (error) {
     core.debug(inspect(error))
     if (error.status == 404) {
