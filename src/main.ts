@@ -12,6 +12,8 @@ async function run(): Promise<void> {
       workflow_inputs: core.getInput('inputs')
     }
     core.debug(`Inputs: ${inspect(inputs)}`)
+    console.log(inputs.workflow_inputs)
+    core.debug(`JSON: ${inspect(inputs.workflow_inputs)}`)
 
     const [owner, repo] = inputs.repository.split('/')
 
