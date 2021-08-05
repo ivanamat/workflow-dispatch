@@ -57,7 +57,7 @@ jobs:
         with:
           token: ${{ secrets.REPO_ACCESS_TOKEN }}
           event-type: tests
-          client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}"}'
+          client-payload: "'{\"ref\": \"${{ github.ref }}\", \"sha\": \"${{ github.sha }}\"}"
 
       - name: Test repository dispatch (default payload)
         uses: ./
