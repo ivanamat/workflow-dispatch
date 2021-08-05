@@ -17,16 +17,6 @@ async function run(): Promise<void> {
 
     const octokit = github.getOctokit(inputs.token)
 
-    /*
-    await octokit.rest.repos.createDispatchEvent({
-      owner: owner,
-      repo: repo,
-      event_type: inputs.eventType,
-      client_payload: JSON.parse(inputs.clientPayload),
-      inputs: JSON.parse(inputs.inputs)
-    })
-    */
-    
     await octokit.rest.actions.createWorkflowDispatch({
         owner: owner,
         repo: repo,
