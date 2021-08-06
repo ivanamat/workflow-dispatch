@@ -8,7 +8,7 @@ async function run(): Promise<void> {
       token: core.getInput('token'),
       repository: core.getInput('repository'),
       ref: core.getInput('ref'),
-      workflow_id: core.getInput('workflow_id'),
+      workflow_id: core.getInput('workflow'),
       workflow_inputs: core.getInput('inputs')
     }
     core.debug(`Inputs: ${inspect(inputs)}`)

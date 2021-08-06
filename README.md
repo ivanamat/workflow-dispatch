@@ -1,5 +1,5 @@
 # Workflow Dispatch
-[![CI](https://github.com/peter-evans/repository-dispatch/workflows/CI/badge.svg)](https://github.com/peter-evans/repository-dispatch/actions?query=workflow%3ACI)
+[![CI](https://github.com/ivanamat/workflow-dispatch/workflows/CI/badge.svg)](https://github.com/ivanamat/workflow-dispatch/actions?query=workflow%3ACI)
 [![GitHub Marketplace](https://img.shields.io/badge/Marketplace-Repository%20Dispatch-blue.svg?colorA=24292e&colorB=0366d6&style=flat&longCache=true&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAM6wAADOsB5dZE0gAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAERSURBVCiRhZG/SsMxFEZPfsVJ61jbxaF0cRQRcRJ9hlYn30IHN/+9iquDCOIsblIrOjqKgy5aKoJQj4O3EEtbPwhJbr6Te28CmdSKeqzeqr0YbfVIrTBKakvtOl5dtTkK+v4HfA9PEyBFCY9AGVgCBLaBp1jPAyfAJ/AAdIEG0dNAiyP7+K1qIfMdonZic6+WJoBJvQlvuwDqcXadUuqPA1NKAlexbRTAIMvMOCjTbMwl1LtI/6KWJ5Q6rT6Ht1MA58AX8Apcqqt5r2qhrgAXQC3CZ6i1+KMd9TRu3MvA3aH/fFPnBodb6oe6HM8+lYHrGdRXW8M9bMZtPXUji69lmf5Cmamq7quNLFZXD9Rq7v0Bpc1o/tp0fisAAAAASUVORK5CYII=)](https://github.com/marketplace/actions/repository-dispatch)
 
 A GitHub action to create a repository dispatch event.
@@ -7,11 +7,14 @@ A GitHub action to create a repository dispatch event.
 ## Usage
 
 ```yml
-      - name: Repository Dispatch
-        uses: peter-evans/repository-dispatch@v1
+      - name: Workflow Dispatch
+        uses: ivanamat/workflow-dispatch@v1
         with:
           token: ${{ secrets.REPO_ACCESS_TOKEN }}
-          event-type: my-event
+          repository: the-iron-bank-of-braavos/poc-actions
+          workflow: nested-workflow.yml
+          ref: refs/heads/feature/workflow-dispatch
+          inputs: "{\"name\":\"Command Line ivanamat/workflow-dispatch\", \"home\":\"CLI\" }"
 ```
 
 ### Action inputs
@@ -20,8 +23,9 @@ A GitHub action to create a repository dispatch event.
 | --- | --- | --- |
 | `token` | (**required**) A `repo` scoped GitHub [Personal Access Token](https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token). See [token](#token) for further details. | |
 | `repository` | The full name of the repository to send the dispatch. | `github.repository` (current repository) |
-| `event-type` | (**required**) A custom webhook event name. | |
-| `client-payload` | JSON payload with extra information about the webhook event that your action or workflow may use. | `{}` |
+| `ref` | Branch, tag or commit. | `github.ref` ( Current branch ) |
+| `workflow` | (**required**) A custom workflow id or file name. | |
+| `client-payload` | JSON payload with params. | `{}` |
 
 #### `token`
 
@@ -34,8 +38,8 @@ If you will be dispatching to a public repository then you can use the more limi
 Here is an example setting all of the input parameters.
 
 ```yml
-      - name: Repository Dispatch
-        uses: peter-evans/repository-dispatch@v1
+      - name: Workflow Dispatch
+        uses: ivanamat/workflow-dispatch@v1
         with:
           token: ${{ secrets.REPO_ACCESS_TOKEN }}
           repository: username/my-repo
@@ -47,7 +51,7 @@ Here is an example `on: repository_dispatch` workflow to receive the event.
 Note that repository dispatch events will only trigger a workflow run if the workflow is committed to the default branch.
 
 ```yml
-name: Repository Dispatch
+name: Workflow Dispatch
 on:
   repository_dispatch:
     types: [my-event]
@@ -77,8 +81,8 @@ jobs:
         repo: ['my-org/repo1', 'my-org/repo2', 'my-org/repo3']
     runs-on: ubuntu-latest
     steps:
-      - name: Repository Dispatch
-        uses: peter-evans/repository-dispatch@v1
+      - name: Workflow Dispatch
+        uses: ivanamat/workflow-dispatch@v1
         with:
           token: ${{ secrets.REPO_ACCESS_TOKEN }}
           repository: ${{ matrix.repo }}
