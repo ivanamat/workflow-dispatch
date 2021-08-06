@@ -14,7 +14,7 @@ A GitHub action to create a repository dispatch event.
           repository: the-iron-bank-of-braavos/poc-actions
           workflow: nested-workflow.yml
           ref: refs/heads/feature/workflow-dispatch
-          inputs: "{\"name\":\"Command Line ivanamat/workflow-dispatch\", \"home\":\"CLI\" }"
+          inputs: "{\"name\":\"Command Line User\", \"home\":\"CLI\" }"
 ```
 
 ### Action inputs
@@ -42,76 +42,42 @@ Here is an example setting all of the input parameters.
         uses: ivanamat/workflow-dispatch@v1
         with:
           token: ${{ secrets.REPO_ACCESS_TOKEN }}
-          repository: username/my-repo
-          event-type: my-event
-          client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}"}'
+          repository: the-iron-bank-of-braavos/poc-actions
+          workflow: nested-workflow.yml
+          ref: refs/heads/feature/workflow-dispatch
+          inputs: "{\"name\":\"Command Line User\", \"home\":\"CLI\" }"
 ```
 
 Here is an example `on: repository_dispatch` workflow to receive the event.
 Note that repository dispatch events will only trigger a workflow run if the workflow is committed to the default branch.
 
 ```yml
-name: Workflow Dispatch
+name: NestedWorkflow
+
 on:
-  repository_dispatch:
-    types: [my-event]
-jobs:
-  myEvent:
+  workflow_dispatch:
+    inputs:
+      name:
+        description: 'Person to greet'
+        required: true
+        default: 'Mona the Octocat'
+      home:
+        description: 'location'
+        required: false
+        default: 'The Octoverse'
+
+jobs: 
+  nested-workflow-job:
     runs-on: ubuntu-latest
+    name: Nested Workflow Job
+    if: ${{ github.event.inputs.name != '' }}
     steps:
-      - uses: actions/checkout@v2
-        with:
-          ref: ${{ github.event.client_payload.ref }}
-      - run: echo ${{ github.event.client_payload.sha }}
-```
+    - run: |
+        echo "Hello ${{ github.event.inputs.name }} in ${{ github.event.inputs.home }} from workflow dispatch"
+  
 
-### Dispatch to multiple repositories
-
-You can dispatch to multiple repositories by using a [matrix strategy](https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstrategymatrix). In the following example, after the `build` job succeeds, an event is dispatched to three different repositories.
-
-```yml
-jobs:
-  build:
-    # Main workflow job that builds, tests, etc.
-
-  dispatch:
-    needs: build
-    strategy:
-      matrix:
-        repo: ['my-org/repo1', 'my-org/repo2', 'my-org/repo3']
-    runs-on: ubuntu-latest
-    steps:
-      - name: Workflow Dispatch
-        uses: ivanamat/workflow-dispatch@v1
-        with:
-          token: ${{ secrets.REPO_ACCESS_TOKEN }}
-          repository: ${{ matrix.repo }}
-          event-type: my-event
-```
-
-## Client payload
-
-The GitHub API allows a maximum of 10 top-level properties in the `client-payload` JSON.
-If you use more than that you will see an error message like the following.
 
 ```
-No more than 10 properties are allowed; 14 were supplied.
-```
-
-For example, this payload will fail because it has more than 10 top-level properties.
-
-```yml
-client-payload: ${{ toJson(github) }}
-```
-
-To solve this you can simply wrap the payload in a single top-level property.
-The following payload will succeed.
-
-```yml
-client-payload: '{"github": ${{ toJson(github) }}}'
-```
-
-Additionally, there is a limitation on the total data size of the `client-payload`. A very large payload may result in a `client_payload is too large` error.
 
 ## License
 
