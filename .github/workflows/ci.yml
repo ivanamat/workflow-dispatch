@@ -24,7 +24,8 @@ jobs:
       - run: npm run format-check
       - run: npm run lint
       - run: npm run test
-      - run: |
+      - name: "Commit changes"
+        run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
           git add -A
