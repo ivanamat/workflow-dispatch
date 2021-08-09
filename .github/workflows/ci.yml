@@ -24,6 +24,12 @@ jobs:
       - run: npm run format-check
       - run: npm run lint
       - run: npm run test
+      - run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add -A
+          git commit -m "Build index.js"
+          git push
       - uses: actions/upload-artifact@v2
         with:
           name: dist
@@ -33,13 +39,6 @@ jobs:
           name: action.yml
           path: action.yml
       - uses: actions/checkout@v2
-      - run: |
-          git config user.name github-actions
-          git config user.email github-actions@github.com
-          git add -A
-          git commit -m "Build index.js"
-          git push
-          exit 0
 
   test:
     if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository
