@@ -39,6 +39,7 @@ jobs:
           git add -A
           git commit -m "Build index.js"
           git push
+          exit 0
 
   test:
     if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository
