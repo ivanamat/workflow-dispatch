@@ -18,13 +18,12 @@ async function run(): Promise<void> {
     const octokit = github.getOctokit(inputs.token)
 
     await octokit.rest.actions.createWorkflowDispatch({
-        owner: owner,
-        repo: repo,
-        workflow_id: inputs.workflow_id,
-        ref: inputs.ref,
-        inputs: JSON.parse(inputs.workflow_inputs)
+      owner: owner,
+      repo: repo,
+      workflow_id: inputs.workflow_id,
+      ref: inputs.ref,
+      inputs: JSON.parse(inputs.workflow_inputs)
     })
-    
   } catch (error) {
     core.debug(inspect(error))
     if (error.status == 404) {

@@ -45,7 +45,7 @@ function run() {
                 token: core.getInput('token'),
                 repository: core.getInput('repository'),
                 ref: core.getInput('ref'),
-                workflow_id: core.getInput('workflow_id'),
+                workflow_id: core.getInput('workflow'),
                 workflow_inputs: core.getInput('inputs')
             };
             core.debug(`Inputs: ${util_1.inspect(inputs)}`);
