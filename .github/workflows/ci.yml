@@ -41,7 +41,7 @@ jobs:
           path: action.yml
 
   test:
-    if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository
+    #if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository
     needs: [build]
     runs-on: ubuntu-latest
     steps:
@@ -49,12 +49,11 @@ jobs:
       - name: Test workflow dispatch
         uses: ./
         with:
-          repository: ivanamat/workflow-dispatch
           workflow: nested-workflow.yml
-          inputs: "{\"name\":\"Command Line ivanamat/workflow-dispatch\", \"home\":\"CLI\" }"
+          inputs: "{\"name\":\"Command Line User\", \"home\":\"CLI\" }"
           
   test-remote:
-    if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository
+    #if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository
     needs: [build]
     runs-on: ubuntu-latest
     steps:
@@ -66,7 +65,7 @@ jobs:
           repository: the-iron-bank-of-braavos/poc-actions
           workflow: nested-workflow.yml
           ref: refs/heads/feature/workflow-dispatch
-          inputs: "{\"name\":\"Command Line ivanamat/workflow-dispatch\", \"home\":\"CLI\" }"
+          inputs: "{\"name\":\"Remote Command Line User\", \"home\":\"CLI\" }"
 
   package:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
