@@ -52,6 +52,7 @@ jobs:
       - name: Test workflow dispatch
         uses: ./
         with:
+          token: ${{ github.token }}
           workflow: nested-workflow.yml
           inputs: "{\"name\":\"Command Line User\", \"home\":\"CLI\" }"
           
