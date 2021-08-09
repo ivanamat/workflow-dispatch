@@ -38,9 +38,20 @@ jobs:
         with:
           name: action.yml
           path: action.yml
-      - uses: actions/checkout@v2
 
   test:
+    if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Test workflow dispatch
+        uses: ./
+        with:
+          workflow: nested-workflow.yml
+          inputs: "{\"name\":\"Command Line ivanamat/workflow-dispatch\", \"home\":\"CLI\" }"
+          
+  test-remote:
     if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository
     needs: [build]
     runs-on: ubuntu-latest
