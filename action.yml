@@ -10,12 +10,11 @@ inputs:
       Also when generating a new PAT, select the least scopes necessary.
       [Learn more about creating and using encrypted secrets](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/creating-and-using-encrypted-secrets)
     default: ${{ github.token }}
-    required: true
   repository:
     description: 'The full name of the repository to send the dispatch.'
     default: ${{ github.repository }}
   workflow:
-    description: 'Workflow'
+    description: 'Workflow filename'
     required: true
   ref:
     description: 'Branch, tag or commit.'
