@@ -49,6 +49,7 @@ jobs:
       - name: Test workflow dispatch
         uses: ./
         with:
+          token: ${{ secrets.REPO_ACCESS_TOKEN }}
           workflow: nested-workflow.yml
           inputs: "{\"name\":\"Command Line User\", \"home\":\"CLI\" }"
           
