@@ -49,6 +49,7 @@ jobs:
       - name: Test workflow dispatch
         uses: ./
         with:
+          repository: ivanamat/workflow-dispatch
           workflow: nested-workflow.yml
           inputs: "{\"name\":\"Command Line ivanamat/workflow-dispatch\", \"home\":\"CLI\" }"
           
