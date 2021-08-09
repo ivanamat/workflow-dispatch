@@ -29,7 +29,7 @@ jobs:
           git config user.email github-actions@github.com
           git add -A
           git commit -m "Build index.js"
-          git push
+          (git push) || true
       - uses: actions/upload-artifact@v2
         with:
           name: dist
