@@ -1,4 +1,4 @@
-name: NestedWorkflow
+name: Nested Workflow
 
 on:
   workflow_dispatch:
@@ -16,7 +16,6 @@ jobs:
   nested-workflow-job:
     runs-on: ubuntu-latest
     name: Nested Workflow Job
-    #if: ${{ github.event.inputs.name != '' }}
     steps:
     - run: |
         echo "Hello ${{ github.event.inputs.name }} in ${{ github.event.inputs.home }} from workflow dispatch"

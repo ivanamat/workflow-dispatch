@@ -1,7 +1,5 @@
 name: CI
 
-permissions: write-all
-
 on:
   push:
     branches: [main]
@@ -43,7 +41,8 @@ jobs:
           name: action.yml
           path: action.yml
 
-  test:
+  test-local-dispatch:
+    name: Test local dispatch
     #if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository
     needs: [build]
     runs-on: ubuntu-latest
@@ -52,20 +51,20 @@ jobs:
       - name: Test workflow dispatch
         uses: ./
         with:
-          token: ${{ github.token }}
           workflow: nested-workflow.yml
           inputs: "{\"name\":\"Command Line User\", \"home\":\"CLI\" }"
           
-  test-remote:
+  test-remote-dispatch:
+    name: Test remote dispatch`
     #if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository
     needs: [build]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Test workflow dispatch
+      - name: Test remote workflow dispatch
         uses: ./
         with:
-          token: ${{ secrets.REPO_ACCESS_TOKEN }}
+          token: ${{ secrets.USER_PAT }}
           repository: the-iron-bank-of-braavos/poc-actions
           workflow: nested-workflow.yml
           ref: refs/heads/feature/workflow-dispatch
