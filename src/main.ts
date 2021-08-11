@@ -34,7 +34,7 @@ async function run(): Promise<void> {
       installationId: inputs.installationId
     })
     
-    core.debug(`App AUTH: ${inspect(appAuth)}`)
+    core.debug(`App AUTH: ${inspect(appAuth.token)}`)
 
     const octokit = github.getOctokit(inputs.token)
 
