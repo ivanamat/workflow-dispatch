@@ -22,6 +22,21 @@ inputs:
   inputs:
     description: 'JSON inputs with extra information about the webhook event that your action or worklow may use.'
     default: '{}'
+  appId:
+    description: 'App ID.'
+    default: ''
+  privateKey:
+    description: 'Private RSA key.'
+    default: ''
+  clientId:
+    description: 'App Client ID.'
+    default: ''
+  clientSecret:
+    description: 'App Client Secret.'
+    default: ''
+  installationId:
+    description: 'App installation ID.'
+    default: ''
 runs:
   using: 'node12'
   main: 'dist/index.js'
