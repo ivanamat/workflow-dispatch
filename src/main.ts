@@ -1,6 +1,7 @@
 import * as core from '@actions/core'
 import * as github from '@actions/github'
-import { createAppAuth } from '@octokit/auth-app';
+// import { createAppAuth } from '@octokit/auth-app'
+import { createAppAuth } from "https://cdn.skypack.dev/@octokit/auth-app";;
 import {inspect} from 'util'
 
 async function run(): Promise<void> {

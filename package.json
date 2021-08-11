@@ -28,8 +28,7 @@
   "homepage": "https://github.com/ivanamat/workflow-dispatch#readme",
   "dependencies": {
     "@actions/core": "1.4.0",
-    "@actions/github": "5.0.0",
-    "@actions/auth-app": "3.6.0"
+    "@actions/github": "5.0.0"
   },
   "devDependencies": {
     "@types/jest": "26.0.24",
