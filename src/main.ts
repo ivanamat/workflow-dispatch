@@ -29,12 +29,12 @@ async function run(): Promise<void> {
     })
 
     // Retrieve installation access token
-    const appAuth = const installationAuthentication = await auth({
+    const installationAuthentication = await auth({
       type: 'installation',
       installationId: inputs.installationId
     })
     
-    core.debug(`App AUTH: ${inspect(appAuth.token)}`)
+    core.debug(`App AUTH: ${inspect(installationAuthentication)}`)
 
     const octokit = github.getOctokit(inputs.token)
 
