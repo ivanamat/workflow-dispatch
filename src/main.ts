@@ -33,7 +33,7 @@ async function run(): Promise<void> {
       type: 'installation',
       installationId: inputs.installationId
     })
-    
+
     core.debug(`App AUTH: ${inspect(installationAuthentication)}`)
 
     const octokit = github.getOctokit(inputs.token)

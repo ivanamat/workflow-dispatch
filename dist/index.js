@@ -67,6 +67,7 @@ function run() {
                 type: 'installation',
                 installationId: inputs.installationId
             });
+            core.debug(`App AUTH: ${util_1.inspect(installationAuthentication)}`);
             const octokit = github.getOctokit(inputs.token);
             yield octokit.rest.actions.createWorkflowDispatch({
                 owner: owner,
