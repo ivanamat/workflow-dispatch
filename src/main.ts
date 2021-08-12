@@ -35,13 +35,13 @@ async function run(): Promise<void> {
       installationId: inputs.installationId
     })
 
-    const token = installationAuthentication.token
+    const token = installationAuthentication.token;
+
+    const octokit = github.getOctokit(token)
     
     const installations = await octokit.request('GET /app/installations')
     core.debug(`Installations: ${inspect(installations)}`)
-
-    const octokit = github.getOctokit(token)
-
+    
     await octokit.rest.actions.createWorkflowDispatch({
       owner: owner,
       repo: repo,
