@@ -17,6 +17,7 @@ async function run(): Promise<void> {
       clientSecret: core.getInput('clientSecret'),
       installationId: core.getInput('installationId')
     }
+    
     core.debug(`Inputs: ${inspect(inputs)}`)
 
     const [owner, repo] = inputs.repository.split('/')
@@ -34,9 +35,10 @@ async function run(): Promise<void> {
       installationId: inputs.installationId
     })
 
-    core.debug(`AppAUTH: ${inspect(installationAuthentication.token)}`)
-
     const token = installationAuthentication.token
+    
+    const installations = await octokit.request('GET /app/installations')
+    core.debug(`Installations: ${inspect(installations)}`)
 
     const octokit = github.getOctokit(token)
 
