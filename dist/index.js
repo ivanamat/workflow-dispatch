@@ -38,7 +38,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 const core = __importStar(__nccwpck_require__(2186));
 const github = __importStar(__nccwpck_require__(5438));
 const auth_app_1 = __nccwpck_require__(7541);
-//import { createAppAuth } from "https://cdn.skypack.dev/@octokit/auth-app";;
+
 const util_1 = __nccwpck_require__(1669);
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
@@ -61,6 +61,7 @@ function run() {
                 appId: inputs.appId,
                 privateKey: inputs.privateKey,
                 clientId: inputs.clientId,
+
                 clientSecret: inputs.clientSecret,
             });
             // Retrieve installation access token
@@ -69,6 +70,7 @@ function run() {
                 installationId: inputs.installationId,
             });
             const octokit = github.getOctokit(inputs.token);
+
             yield octokit.rest.actions.createWorkflowDispatch({
                 owner: owner,
                 repo: repo,

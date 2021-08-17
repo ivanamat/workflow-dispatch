@@ -1,7 +1,6 @@
 import * as core from '@actions/core'
 import * as github from '@actions/github'
-import { createAppAuth } from '@octokit/auth-app'
-//import { createAppAuth } from "https://cdn.skypack.dev/@octokit/auth-app";;
+import {createAppAuth} from '@octokit/auth-app'
 import {inspect} from 'util'
 
 async function run(): Promise<void> {
@@ -18,24 +17,30 @@ async function run(): Promise<void> {
       clientSecret: core.getInput('clientSecret'),
       installationId: core.getInput('installationId')
     }
+
     core.debug(`Inputs: ${inspect(inputs)}`)
 
     const [owner, repo] = inputs.repository.split('/')
-    
+
     const auth = createAppAuth({
       appId: inputs.appId,
       privateKey: inputs.privateKey,
       clientId: inputs.clientId,
-      clientSecret: inputs.clientSecret,
+      clientSecret: inputs.clientSecret
     })
 
     // Retrieve installation access token
     const installationAuthentication = await auth({
-      type: "installation",
-      installationId: inputs.installationId,
+      type: 'installation',
+      installationId: inputs.installationId
     })
 
-    const octokit = github.getOctokit(inputs.token)
+    const token = installationAuthentication.token
+
+    const octokit = github.getOctokit(token)
+
+    const installations = await octokit.request('GET /app/installations')
+    core.debug(`Installations: ${inspect(installations)}`)
 
     await octokit.rest.actions.createWorkflowDispatch({
       owner: owner,
