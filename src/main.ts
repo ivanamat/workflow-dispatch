@@ -4,7 +4,7 @@ import {createAppAuth} from '@octokit/auth-app'
 import {inspect} from 'util'
 
 
-function checkAuthParams(inputs:string[]){
+function checkAuthParams(inputs){
     try {
         if (
         inputs.token === '' &&
