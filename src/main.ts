@@ -34,7 +34,7 @@ async function run(): Promise<void> {
         '[Error]: Authorization is required!. Yoy need to provide a Personal Access Token or Application Credentials. Application Credentials require: appId, privateKey, clientId, clientSecret and installationId'
       )
       
-      exit 1
+      exit 1;
     }
 
     const auth = createAppAuth({
