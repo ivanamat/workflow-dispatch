@@ -21,6 +21,18 @@ async function run(): Promise<void> {
     core.debug(`Inputs: ${inspect(inputs)}`)
 
     const [owner, repo] = inputs.repository.split('/')
+    
+    if(inputs.token == "" && 
+        (inputs.appId == "" || 
+        inputs.privateKey == "" || 
+        inputs.clientId == "" || 
+        inputs.clientSecret == "" || 
+        installationId == "")) {
+      core.setFailed(
+        '[Error]: Authorization is required!. Yoy need to provide Personal Access Token or application credentials.',
+        'For application credentials you need to provide appId, privateKey, clientId, clientSecret and installationId'
+      )
+    }
 
     const auth = createAppAuth({
       appId: inputs.appId,
