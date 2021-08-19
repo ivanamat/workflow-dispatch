@@ -3,6 +3,26 @@ import * as github from '@actions/github'
 import {createAppAuth} from '@octokit/auth-app'
 import {inspect} from 'util'
 
+
+function checkAuthParams(inputs:string[]){
+    try {
+        if (
+        inputs.token === '' &&
+        (inputs.appId === '' ||
+            inputs.privateKey === '' ||
+            inputs.clientId === '' ||
+            inputs.clientSecret === '' ||
+            inputs.installationId === '')
+        ) {
+            core.setFailed(
+                '[Error]: Authorization is required!. Yoy need to provide a Personal Access Token or Application Credentials. Application Credentials require: appId, privateKey, clientId, clientSecret and installationId'
+            )
+        }
+    } catch(error){
+        
+    }
+}
+
 async function run(): Promise<void> {
   try {
     const inputs = {
@@ -22,18 +42,7 @@ async function run(): Promise<void> {
 
     const [owner, repo] = inputs.repository.split('/')
 
-    if (
-      inputs.token === '' &&
-      (inputs.appId === '' ||
-        inputs.privateKey === '' ||
-        inputs.clientId === '' ||
-        inputs.clientSecret === '' ||
-        inputs.installationId === '')
-    ) {
-      core.setFailed(
-          '[Error]: Authorization is required!. Yoy need to provide a Personal Access Token or Application Credentials. Application Credentials require: appId, privateKey, clientId, clientSecret and installationId',1
-      )
-    }
+    checkAuthParams(inputs)
 
     const auth = createAppAuth({
       appId: inputs.appId,
