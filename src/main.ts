@@ -27,7 +27,7 @@ async function run(): Promise<void> {
         inputs.privateKey == "" || 
         inputs.clientId == "" || 
         inputs.clientSecret == "" || 
-        installationId == "")) {
+        inputs.installationId == "")) {
       core.setFailed(
         '[Error]: Authorization is required!. Yoy need to provide Personal Access Token or application credentials.',
         'For application credentials you need to provide appId, privateKey, clientId, clientSecret and installationId'
