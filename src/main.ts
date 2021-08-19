@@ -35,7 +35,7 @@ async function run(): Promise<void> {
       )
     }
 
-    var token = inputs.token;
+    let token = inputs.token;
     
     if (
       (inputs.appId &&
