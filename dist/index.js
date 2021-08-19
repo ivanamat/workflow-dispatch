@@ -62,8 +62,7 @@ function run() {
                     inputs.clientId === '' ||
                     inputs.clientSecret === '' ||
                     inputs.installationId === '')) {
-                core.setFailed('[Error]: Authorization is required!. Yoy need to <strong>provide a Personal Access Token or Application Credentials</strong>.\nA pplication Credentials require: appId, privateKey, clientId, clientSecret and installationId');
-                throw new Error();
+                throw new Error('[Error]: Authorization is required!. Yoy need to provide a Personal Access Token or Application Credentials. Application Credentials require: appId, privateKey, clientId, clientSecret and installationId');
             }
             const auth = auth_app_1.createAppAuth({
                 appId: inputs.appId,
