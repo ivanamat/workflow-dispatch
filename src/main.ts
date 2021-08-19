@@ -31,7 +31,7 @@ async function run(): Promise<void> {
         inputs.installationId === '')
     ) {
       throw new Error(
-          '[Error]: Authorization is required!. Yoy need to provide a Personal Access Token or Application Credentials. Application Credentials require: appId, privateKey, clientId, clientSecret and installationId'
+        '[Error]: Authorization is required!. Yoy need to provide a Personal Access Token or Application Credentials. Application Credentials require: appId, privateKey, clientId, clientSecret and installationId'
       )
     }
 
