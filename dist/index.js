@@ -56,6 +56,14 @@ function run() {
             };
             core.debug(`Inputs: ${util_1.inspect(inputs)}`);
             const [owner, repo] = inputs.repository.split('/');
+            if (inputs.token == "" &&
+                (inputs.appId == "" ||
+                    inputs.privateKey == "" ||
+                    inputs.clientId == "" ||
+                    inputs.clientSecret == "" ||
+                    inputs.installationId == "")) {
+                core.setFailed('[Error]: Authorization is required!. Yoy need to <strong>provide a Personal Access Token or Application Credentials</strong>.\nA pplication Credentials require: appId, privateKey, clientId, clientSecret and installationId');
+            }
             const auth = auth_app_1.createAppAuth({
                 appId: inputs.appId,
                 privateKey: inputs.privateKey,
