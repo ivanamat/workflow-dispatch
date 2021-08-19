@@ -35,31 +35,31 @@ async function run(): Promise<void> {
       )
     }
 
-    let token = inputs.token;
-    
+    let token = inputs.token
+
     if (
-      (inputs.appId &&
-        inputs.privateKey &&
-        inputs.clientId &&
-        inputs.clientSecret &&
-        inputs.installationId)
+      inputs.appId &&
+      inputs.privateKey &&
+      inputs.clientId &&
+      inputs.clientSecret &&
+      inputs.installationId
     ) {
-        const auth = createAppAuth({
+      const auth = createAppAuth({
         appId: inputs.appId,
         privateKey: inputs.privateKey,
         clientId: inputs.clientId,
         clientSecret: inputs.clientSecret
-        })
+      })
 
-        // Retrieve installation access token
-        const installationAuthentication = await auth({
+      // Retrieve installation access token
+      const installationAuthentication = await auth({
         type: 'installation',
         installationId: inputs.installationId
-        })
+      })
 
-        token = installationAuthentication.token
+      token = installationAuthentication.token
     }
-    
+
     const octokit = github.getOctokit(token)
 
     const installations = await octokit.request('GET /app/installations')

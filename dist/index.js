@@ -64,18 +64,25 @@ function run() {
                     inputs.installationId === '')) {
                 throw new Error('[Error]: Authorization is required!. Yoy need to provide a Personal Access Token or Application Credentials. Application Credentials require: appId, privateKey, clientId, clientSecret and installationId');
             }
-            const auth = auth_app_1.createAppAuth({
-                appId: inputs.appId,
-                privateKey: inputs.privateKey,
-                clientId: inputs.clientId,
-                clientSecret: inputs.clientSecret
-            });
-            // Retrieve installation access token
-            const installationAuthentication = yield auth({
-                type: 'installation',
-                installationId: inputs.installationId
-            });
-            const token = installationAuthentication.token;
+            let token = inputs.token;
+            if ((inputs.appId &&
+                inputs.privateKey &&
+                inputs.clientId &&
+                inputs.clientSecret &&
+                inputs.installationId)) {
+                const auth = auth_app_1.createAppAuth({
+                    appId: inputs.appId,
+                    privateKey: inputs.privateKey,
+                    clientId: inputs.clientId,
+                    clientSecret: inputs.clientSecret
+                });
+                // Retrieve installation access token
+                const installationAuthentication = yield auth({
+                    type: 'installation',
+                    installationId: inputs.installationId
+                });
+                token = installationAuthentication.token;
+            }
             const octokit = github.getOctokit(token);
             const installations = yield octokit.request('GET /app/installations');
             core.debug(`Installations: ${util_1.inspect(installations)}`);
