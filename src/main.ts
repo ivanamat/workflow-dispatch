@@ -33,6 +33,7 @@ async function run(): Promise<void> {
       core.setFailed(
         '[Error]: Authorization is required!. Yoy need to <strong>provide a Personal Access Token or Application Credentials</strong>.\nA pplication Credentials require: appId, privateKey, clientId, clientSecret and installationId'
       )
+      exit 1;
     }
 
     const auth = createAppAuth({
