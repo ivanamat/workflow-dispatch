@@ -3,15 +3,6 @@ import * as github from '@actions/github'
 import {createAppAuth} from '@octokit/auth-app'
 import {inspect} from 'util'
 
-
-function checkAuthParams(inputs:string[]){
-    try {
-        
-    } catch(error){
-        
-    }
-}
-
 async function run(): Promise<void> {
   try {
     const inputs = {
