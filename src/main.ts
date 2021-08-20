@@ -55,7 +55,7 @@ async function run(): Promise<void> {
         clientId: inputs.clientId,
         clientSecret: inputs.clientSecret
       })
-      
+
       core.debug(`AUTH: ${inspect(auth)}`)
 
       // Retrieve installation access token
