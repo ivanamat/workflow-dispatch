@@ -19,7 +19,7 @@ async function run(): Promise<void> {
     }
 
     core.debug(`Inputs: ${inspect(inputs)}`)
-    core.debug(`API_GH_APP_ID: ${inspect(process.env.API_GH_APP_ID)}`)
+    // core.debug(`API_GH_APP_ID: ${inspect(process.env.API_GH_APP_ID)}`)
 
     const [owner, repo] = inputs.repository.split('/')
 
@@ -55,6 +55,8 @@ async function run(): Promise<void> {
         clientId: inputs.clientId,
         clientSecret: inputs.clientSecret
       })
+      
+      core.debug(`AUTH: ${inspect(auth)}`)
 
       // Retrieve installation access token
       const installationAuthentication = await auth({
