@@ -79,7 +79,6 @@ function run() {
                     clientId: inputs.clientId,
                     clientSecret: inputs.clientSecret
                 });
-                core.debug(`AUTH: ${util_1.inspect(auth)}`);
                 // Retrieve installation access token
                 const installationAuthentication = yield auth({
                     type: 'installation',
@@ -91,8 +90,8 @@ function run() {
                 throw new Error('Invalid credentials! You must provide a valid personal access token or valid Application Credentials. Application Credentials requires appId, privateKey, clientId, clientSecret, and installation. Please, review your defined credentials.');
             }
             const octokit = github.getOctokit(token);
-            const installations = yield octokit.request('GET /app/installations');
-            core.debug(`Installations: ${util_1.inspect(installations)}`);
+            // const installations = await octokit.request('GET /app/installations')
+            // core.debug(`Installations: ${inspect(installations)}`)
             yield octokit.rest.actions.createWorkflowDispatch({
                 owner: owner,
                 repo: repo,
