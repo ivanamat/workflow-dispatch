@@ -85,20 +85,18 @@ function run() {
                         //installationId: 123,
                     }
                 });
-                const installationsRequest = yield appOctokit.request('GET /app/installations');
-                core.debug(`APP Installations: ${util_1.inspect(installationsRequest)}`);
-                const installationsResponse = installationsRequest.data;
-                core.debug(`installationsResponse: ${util_1.inspect(installationsResponse)}`);
-                // core.debug(`Installations: ${inspect(installationsResponse)}`)
-                const installationId = 0;
+                const installations = yield appOctokit.request('GET /app/installations');
+                core.debug(`APP Installations: ${util_1.inspect(installations)}`);
+                let installationId = 0;
                 /*
-                while (installations.data) {
-                  if(installations.data.app_id == inputs.appId) {
-                    installationId = installations.data.id
+                while (installations) {
+                  if(installations[0].app_id == inputs.appId) {
+                    installationId = installations[0].id
                     break
                   }
                 }
                 */
+                installationId = 123;
                 //core.debug(`APP Installation ID: ${installationId}`)
                 //throw new Error(`APP Installation ID: ${installationId}`)
                 throw new Error(`EXIT!`);
