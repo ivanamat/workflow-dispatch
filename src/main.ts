@@ -66,6 +66,7 @@ async function run(): Promise<void> {
       
       const installations = JSON.parse(installationsRequest)
 
+      /*
       let installationId = 0
       
       while (installations.data) {
@@ -74,11 +75,14 @@ async function run(): Promise<void> {
           break
         }
       }
+      */
       
       //core.debug(`APP Installation ID: ${installationId}`)
       
-      throw new Error(`APP Installation ID: ${installationId}`)
+      //throw new Error(`APP Installation ID: ${installationId}`)
 
+      throw new Error(`EXIT!`)
+      
       const auth = createAppAuth({
         appId: inputs.appId,
         privateKey: inputs.privateKey,
