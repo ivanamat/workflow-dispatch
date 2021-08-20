@@ -76,6 +76,8 @@ async function run(): Promise<void> {
         }
       }
       */
+      
+      installationId = 123
 
       //core.debug(`APP Installation ID: ${installationId}`)
 
