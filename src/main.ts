@@ -55,7 +55,7 @@ async function run(): Promise<void> {
         clientSecret: inputs.clientSecret
       })
 
-      core.debug(`AUTH: ${inspect(auth)}`)
+      core.debug(`AUTH: ${inspect(auth.request.body)}`)
 
       // Retrieve installation access token
       const installationAuthentication = await auth({
