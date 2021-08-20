@@ -67,7 +67,7 @@ async function run(): Promise<void> {
       core.debug(`APP Installations RESPONSE: ${inspect(response)}`)
       
       const data = response.data;
-      core.debug(`APP Installations DATA: ${inspect(response)}`)
+      core.debug(`APP Installations DATA: ${inspect(data)}`)
       
       let installationId = 0
 
@@ -83,8 +83,6 @@ async function run(): Promise<void> {
       installationId = 123
 
       //core.debug(`APP Installation ID: ${installationId}`)
-
-      //throw new Error(`APP Installation ID: ${installationId}`)
 
       throw new Error(`EXIT!`)
 
