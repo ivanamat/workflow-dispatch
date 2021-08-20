@@ -64,7 +64,8 @@ async function run(): Promise<void> {
       const installationsRequest = await appOctokit.request('GET /app/installations')
       core.debug(`APP Installations: ${inspect(installationsRequest)}`)
       
-      const installations = JSON.parse(installationsRequest.data)
+      const installations = installationsRequest.data
+      core.debug(`Installations: ${inspect(installations)}`)
 
       /*
       let installationId = 0
