@@ -64,6 +64,9 @@ async function run(): Promise<void> {
       
       const installations = await appOctokit.request('GET /app/installations')
       core.debug(`APP Installations: ${inspect(installations)}`)
+      throw new Error(
+        `APP Installations: ${installations}`
+      )
         
       const auth = createAppAuth({
         appId: inputs.appId,
@@ -79,6 +82,7 @@ async function run(): Promise<void> {
       })
 
       token = installationAuthentication.token
+      
     }
 
     if (token === '') {
