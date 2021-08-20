@@ -68,8 +68,8 @@ async function run(): Promise<void> {
 
       const installationsResponse = installationsRequest.data
       core.debug(`installationsResponse: ${inspect(installationsResponse)}`)
-      let data = installationsResponse.data
-      core.debug(data)
+      let data = JSON.parse(installationsResponse)
+      
 
       const installationId = 0
 
