@@ -12,6 +12,49 @@ on:
     paths-ignore:
       - 'README.md'
       - 'docs/**'
+  workflow_dispatch:
+    inputs:
+       token:
+         description: 'Personal Access Token'
+         default: ''
+         required: false
+       repository:
+         description: 'Repository'
+         default: ''
+         required: false
+       ref:
+         description: 'Repository branch, tag, or commit'
+         default: ''
+         required: false
+       workflow:
+         description: 'Workflow filename'
+         default: ''
+         required: false
+       inputs:
+         description: 'JSON With imputs'
+         default: ''
+         required: false
+       appId:
+         description: 'APP ID'
+         default: ''
+         required: false
+       privateKey:
+         description: 'APP Private Key'
+         default: ''
+         required: false
+       clientId:
+         description: 'APP Client ID'
+         default: ''
+         required: false
+       clientSecret:
+         description: 'APP Client Secret'
+         default: ''
+         required: false
+       installationId:
+         description: 'APP Installation ID'
+         default: ''
+         required: false
+      
 jobs:
   build:
     runs-on: ubuntu-latest
