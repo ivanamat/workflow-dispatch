@@ -1,6 +1,6 @@
 import * as core from '@actions/core'
 import * as github from '@actions/github'
-import { Octokit } from '@octokit/rest'
+import {Octokit} from '@octokit/rest'
 import {createAppAuth} from '@octokit/auth-app'
 import {inspect} from 'util'
 
@@ -49,25 +49,25 @@ async function run(): Promise<void> {
       inputs.clientSecret &&
       inputs.installationId
     ) {
-        
       const appOctokit = new Octokit({
         authStrategy: createAppAuth,
         auth: {
-            appId: inputs.appId,
-            privateKey: inputs.privateKey,
-            //privateKey: process.env.PRIVATE_KEY,
-            // optional: this will make appOctokit authenticate as app (JWT)
-            //           or installation (access token), depending on the request URL
-            //installationId: 123,
-        },
-      });
-      
+          appId: inputs.appId,
+          privateKey: inputs.privateKey
+          //privateKey: process.env.PRIVATE_KEY,
+          // optional: this will make appOctokit authenticate as app (JWT)
+          //           or installation (access token), depending on the request URL
+          //installationId: 123,
+        }
+      })
+
       const installations = await appOctokit.request('GET /app/installations')
       core.debug(`APP Installations: ${inspect(installations)}`)
+
       throw new Error(
         `APP Installations: ${installations}`
       )
-        
+
       const auth = createAppAuth({
         appId: inputs.appId,
         privateKey: inputs.privateKey,
