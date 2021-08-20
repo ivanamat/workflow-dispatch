@@ -61,14 +61,16 @@ async function run(): Promise<void> {
         }
       })
 
-      const installations = await appOctokit.request('GET /app/installations')
-      core.debug(`APP Installations: ${inspect(installations)}`)
+      const installationsRequest = await appOctokit.request('GET /app/installations')
+      core.debug(`APP Installations: ${inspect(installationsRequest)}`)
+      
+      const installations = JSON.parse(installationsRequest.data)
 
       let installationId = 0
       
-      while (installations.data) {
-        if(installations.data.app_id == inputs.appId) {
-          installationId = installations.data.id
+      while (installations) {
+        if(installations.app_id == inputs.appId) {
+          installationId = installations.id
         }
       }
       
