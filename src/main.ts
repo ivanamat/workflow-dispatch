@@ -19,7 +19,6 @@ async function run(): Promise<void> {
     }
 
     core.debug(`Inputs: ${inspect(inputs)}`)
-    // core.debug(`API_GH_APP_ID: ${inspect(process.env.API_GH_APP_ID)}`)
 
     const [owner, repo] = inputs.repository.split('/')
 
