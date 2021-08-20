@@ -30,15 +30,16 @@ async function run(): Promise<void> {
         inputs.clientSecret === '' ||
         inputs.installationId === '')
     ) {
-      //core.setFailed(
-      //  'Authorization is required!. Yoy need to provide a Personal Access Token or Application Credentials. Application Credentials require: appId, privateKey, clientId, clientSecret and installationId'
-      //)
 
-      throw new Error('Authorization is required!. Yoy need to provide a Personal Access Token or Application Credentials. Application Credentials require: appId, privateKey, clientId, clientSecret and installationId');
-      // throw new Error()
+      throw new Error('Authorization required!. You must provide a personal access token or Application Credentials. Application Credentials requires appId, privateKey, clientId, clientSecret, and installation.');
+      
     }
 
-    let token = inputs.token
+    let token = ''
+    
+    if (inputs.token) {
+        token = inputs.token
+    }
 
     if (
       inputs.appId &&
@@ -61,6 +62,10 @@ async function run(): Promise<void> {
       })
 
       token = installationAuthentication.token
+    }
+    
+    if (token === '') {
+        throw new Error('Invalid credentials! You must provide a valid personal access token or valid Application Credentials. Application Credentials requires appId, privateKey, clientId, clientSecret, and installation. Please, review your defined credentials.')
     }
 
     const octokit = github.getOctokit(token)
