@@ -48,6 +48,22 @@ async function run(): Promise<void> {
       inputs.clientSecret &&
       inputs.installationId
     ) {
+        
+      const appOctokit = new Octokit({
+        authStrategy: createAppAuth,
+        auth: {
+            appId: inputs.appId,
+            privateKey: inputs.privateKey,
+            //privateKey: process.env.PRIVATE_KEY,
+            // optional: this will make appOctokit authenticate as app (JWT)
+            //           or installation (access token), depending on the request URL
+            //installationId: 123,
+        },
+      });
+      
+      const installations = await appOctokit.request('GET /app/installations')
+      core.debug(`APP Installations: ${inspect(installations)}`)
+        
       const auth = createAppAuth({
         appId: inputs.appId,
         privateKey: inputs.privateKey,
@@ -72,8 +88,8 @@ async function run(): Promise<void> {
 
     const octokit = github.getOctokit(token)
 
-    // const installations = await octokit.request('GET /app/installations')
-    // core.debug(`Installations: ${inspect(installations)}`)
+    const installations = await octokit.request('GET /app/installations')
+    core.debug(`Installations: ${inspect(installations)}`)
 
     await octokit.rest.actions.createWorkflowDispatch({
       owner: owner,
