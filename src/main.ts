@@ -74,9 +74,7 @@ async function run(): Promise<void> {
       
       core.debug(`APP Installation ID: ${inspect(installationId)}`)
       
-      throw new Error(
-        `APP Installations: ${installationId}`
-      )
+      throw new Error(`APP Installations: ${installations}`)
 
       const auth = createAppAuth({
         appId: inputs.appId,
@@ -92,7 +90,6 @@ async function run(): Promise<void> {
       })
 
       token = installationAuthentication.token
-      
     }
 
     if (token === '') {

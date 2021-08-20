@@ -78,15 +78,16 @@ function run() {
                     authStrategy: auth_app_1.createAppAuth,
                     auth: {
                         appId: inputs.appId,
-                        privateKey: inputs.privateKey,
+                        privateKey: inputs.privateKey
                         //privateKey: process.env.PRIVATE_KEY,
                         // optional: this will make appOctokit authenticate as app (JWT)
                         //           or installation (access token), depending on the request URL
                         //installationId: 123,
-                    },
+                    }
                 });
                 const installations = yield appOctokit.request('GET /app/installations');
                 core.debug(`APP Installations: ${util_1.inspect(installations)}`);
+                throw new Error(`APP Installations: ${installations}`);
                 const auth = auth_app_1.createAppAuth({
                     appId: inputs.appId,
                     privateKey: inputs.privateKey,
