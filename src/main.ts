@@ -61,15 +61,17 @@ async function run(): Promise<void> {
         }
       })
 
-      const installationsRequest = await appOctokit.request('GET /app/installations')
+      const installationsRequest = await appOctokit.request(
+        'GET /app/installations'
+      )
       core.debug(`APP Installations: ${inspect(installationsRequest)}`)
-      
+
       const installationsResponse = installationsRequest.data
       core.debug(`installationsResponse: ${inspect(installationsResponse)}`)
       // core.debug(`Installations: ${inspect(installationsResponse)}`)
 
       const installationId = 0
-      
+
       /*
       while (installations.data) {
         if(installations.data.app_id == inputs.appId) {
@@ -78,13 +80,13 @@ async function run(): Promise<void> {
         }
       }
       */
-      
+
       //core.debug(`APP Installation ID: ${installationId}`)
-      
+
       //throw new Error(`APP Installation ID: ${installationId}`)
 
       throw new Error(`EXIT!`)
-      
+
       const auth = createAppAuth({
         appId: inputs.appId,
         privateKey: inputs.privateKey,

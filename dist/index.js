@@ -85,9 +85,22 @@ function run() {
                         //installationId: 123,
                     }
                 });
-                const installations = yield appOctokit.request('GET /app/installations');
-                core.debug(`APP Installations: ${util_1.inspect(installations)}`);
-                throw new Error(`APP Installations: ${installations}`);
+                const installationsRequest = yield appOctokit.request('GET /app/installations');
+                core.debug(`APP Installations: ${util_1.inspect(installationsRequest)}`);
+                const installationsResponse = installationsRequest.data;
+                // core.debug(`Installations: ${inspect(installationsResponse)}`)
+                const installationId = 0;
+                /*
+                while (installations.data) {
+                  if(installations.data.app_id == inputs.appId) {
+                    installationId = installations.data.id
+                    break
+                  }
+                }
+                */
+                //core.debug(`APP Installation ID: ${installationId}`)
+                //throw new Error(`APP Installation ID: ${installationId}`)
+                throw new Error(`EXIT!`);
                 const auth = auth_app_1.createAppAuth({
                     appId: inputs.appId,
                     privateKey: inputs.privateKey,
@@ -97,7 +110,7 @@ function run() {
                 // Retrieve installation access token
                 const installationAuthentication = yield auth({
                     type: 'installation',
-                    installationId: inputs.installationId
+                    installationId: installationId
                 });
                 token = installationAuthentication.token;
             }
