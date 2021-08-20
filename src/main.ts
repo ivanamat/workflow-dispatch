@@ -67,7 +67,7 @@ async function run(): Promise<void> {
       const installationsResponse = installationsRequest.data
       // core.debug(`Installations: ${inspect(installationsResponse)}`)
 
-      let installationId = 0
+      const installationId = 0
       
       /*
       while (installations.data) {
