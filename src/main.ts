@@ -64,8 +64,18 @@ async function run(): Promise<void> {
       const installations = await appOctokit.request('GET /app/installations')
       core.debug(`APP Installations: ${inspect(installations)}`)
 
+      let installationId = 0
+      
+      while (installations.data) {
+        if(installations.data.app_id == inputs.appId) {
+          installationId = installations.data.id
+        }
+      }
+      
+      core.debug(`APP Installation ID: ${inspect(installationId)}`)
+      
       throw new Error(
-        `APP Installations: ${installations}`
+        `APP Installations: ${installationId}`
       )
 
       const auth = createAppAuth({
@@ -78,7 +88,7 @@ async function run(): Promise<void> {
       // Retrieve installation access token
       const installationAuthentication = await auth({
         type: 'installation',
-        installationId: inputs.installationId
+        installationId: installationId
       })
 
       token = installationAuthentication.token
