@@ -55,6 +55,7 @@ function run() {
                 installationId: core.getInput('installationId')
             };
             core.debug(`Inputs: ${util_1.inspect(inputs)}`);
+            core.debug(`API_GH_APP_ID: ${util_1.inspect(process.env.API_GH_APP_ID)}`);
             const [owner, repo] = inputs.repository.split('/');
             if (inputs.token === '' &&
                 (inputs.appId === '' ||
