@@ -64,19 +64,20 @@ async function run(): Promise<void> {
       const installationsRequest = await appOctokit.request('GET /app/installations')
       core.debug(`APP Installations: ${inspect(installationsRequest)}`)
       
-      const installations = JSON.parse(installationsRequest.data)
+      const installations = JSON.parse(installationsRequest)
 
       let installationId = 0
       
-      while (installations) {
-        if(installations.app_id == inputs.appId) {
-          installationId = installations.id
+      while (installations.data) {
+        if(installations.data.app_id == inputs.appId) {
+          installationId = installations.data.id
+          break
         }
       }
       
-      core.debug(`APP Installation ID: ${inspect(installationId)}`)
+      //core.debug(`APP Installation ID: ${installationId}`)
       
-      throw new Error(`APP Installations: ${installations}`)
+      throw new Error(`APP Installation ID: ${installationId}`)
 
       const auth = createAppAuth({
         appId: inputs.appId,
