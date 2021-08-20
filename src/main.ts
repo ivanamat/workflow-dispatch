@@ -67,13 +67,13 @@ async function run(): Promise<void> {
       core.debug(`APP Installations: ${inspect(installationsRequest)}`)
 
       //const installationsResponse = installationsRequest.data
-      let installations = JSON.parse(installationsRequest)
+      let installations = installationsRequest.data
       
       let installationId = 0
 
-      while (installations.data) {
-        if(installations.data.app_id == inputs.appId) {
-          installationId = installations.data.id
+      while (installations) {
+        if(installations.app_id == inputs.appId) {
+          installationId = installations.id
           break
         }
       }
