@@ -71,7 +71,7 @@ async function run(): Promise<void> {
       
       let installationId = 0
 
-      while (data) {
+      while (installations.data) {
         if(installations.data.app_id == inputs.appId) {
           installationId = installations.data.id
           break
