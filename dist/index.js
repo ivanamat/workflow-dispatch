@@ -85,8 +85,10 @@ function run() {
                         //installationId: 123,
                     }
                 });
-                const installations = yield appOctokit.request('GET /app/installations');
-                core.debug(`APP Installations: ${util_1.inspect(installations)}`);
+                const response = yield appOctokit.request('GET /app/installations');
+                core.debug(`APP Installations RESPONSE: ${util_1.inspect(response)}`);
+                const data = response.data;
+                core.debug(`APP Installations DATA: ${util_1.inspect(response)}`);
                 let installationId = 0;
                 /*
                 while (installations) {
