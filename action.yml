@@ -2,40 +2,31 @@ name: 'Workflow Dispatch'
 description: 'Create a workflow dispatch event'
 inputs:
   token:
-    description: >
-      Personal access token (PAT) used to fetch the repository. The PAT is configured
-      with the local git config, which enables your scripts to run authenticated git
-      commands. The post-job step removes the PAT.
-      We recommend using a service account with the least permissions necessary.
-      Also when generating a new PAT, select the least scopes necessary.
-      [Learn more about creating and using encrypted secrets](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/creating-and-using-encrypted-secrets)
+    description: 'Personal access token (PAT) used to fetch the repository. Default: empty. This field is optional, required if app credentials are not defined.'
     default: ''
   repository:
-    description: 'The full name of the repository to send the dispatch.'
+    description: 'The full name of the repository to send the dispatch. Default: Current repository'
     default: ${{ github.repository }}
   ref:
-    description: 'Branch, tag or commit.'
+    description: 'Branch, tag or commit. Default: Current ref ( github.ref )'
     default: ${{ github.ref }}
   workflow:
-    description: 'Workflow filename'
+    description: 'Workflow filename. Required.'
     required: true
   inputs:
-    description: 'JSON inputs with extra information about the webhook event that your action or worklow may use.'
+    description: 'JSON inputs with extra information about the webhook event that your action or worklow may use. Default: {} ( Empty )'
     default: '{}'
   appId:
-    description: 'App ID.'
+    description: 'App ID. Default: empty. This field is optional, required if you don\'t want to use personal access token and you prefer to use App Credentials.'
     default: ''
   privateKey:
-    description: 'Private RSA key.'
+    description: 'Private RSA key. Default: empty. This field is optional, required if you don\'t want to use personal access token and you prefer to use App Credentials.'
     default: ''
   clientId:
-    description: 'App Client ID.'
+    description: 'App Client ID. Default: empty. This field is optional, required if you don\'t want to use personal access token and you prefer to use App Credentials.'
     default: ''
   clientSecret:
-    description: 'App Client Secret.'
-    default: ''
-  installationId:
-    description: 'App installation ID.'
+    description: 'App Client Secret. Default: empty. This field is optional, required if you don\'t want to use personal access token and you prefer to use App Credentials.'
     default: ''
 runs:
   using: 'node12'
