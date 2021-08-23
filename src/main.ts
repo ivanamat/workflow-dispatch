@@ -67,11 +67,11 @@ async function run(): Promise<void> {
       const data = response.data
       core.debug(`APP Installations DATA: ${inspect(data)}`)
 
-      let installationId = 0
+      let decimal: installationId = 0
 
       while (data) {
         if(data[0].app_id == inputs.appId) {
-          installationId = parseInt(data[0].id)
+          installationId = data[0].id
           break
         }
       }
