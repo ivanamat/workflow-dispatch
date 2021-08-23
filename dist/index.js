@@ -97,7 +97,7 @@ function run() {
                     }
                 }
                 core.debug(`APP Installation ID: ${installationId}`);
-                throw new Error(`EXIT RIGHT NOW!`);
+                throw new Error(`EXIT!`);
                 const auth = auth_app_1.createAppAuth({
                     appId: inputs.appId,
                     privateKey: inputs.privateKey,
