@@ -42,8 +42,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
       - name: Test workflow dispatch
         uses: ./
         with:
@@ -61,8 +59,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
       - name: Test remote workflow dispatch
         uses: ./
         with:
