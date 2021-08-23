@@ -76,7 +76,7 @@ async function run(): Promise<void> {
         }
       }
 
-      core.debug(`APP Installation ID: ${installationId}`)
+      core.debug(`APP Installation ID: ${inspect(installationId)}`)
 
       const auth = createAppAuth({
         appId: inputs.appId,
