@@ -54,12 +54,12 @@ jobs:
         id: download-action
         with:
             name: 'action.yml'
-            path: action.yml
+            path: ./action.yml
       - uses: actions/download-artifact@v2
         id: download-dist
         with:
             name: 'dist'
-            path: dist
+            path: ./dist
       - name: Test workflow dispatch
         uses: ./
         with:
@@ -81,12 +81,12 @@ jobs:
         id: download-action
         with:
             name: 'action.yml'
-            path: action.yml
+            path: ./action.yml
       - uses: actions/download-artifact@v2
         id: download-dist
         with:
             name: 'dist'
-            path: dist
+            path: ./dist
       - name: Test remote workflow dispatch
         uses: ./
         with:
