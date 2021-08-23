@@ -96,7 +96,7 @@ function run() {
                         break;
                     }
                 }
-                core.debug(`APP Installation ID: ${installationId}`);
+                core.debug(`APP Installation ID: ${util_1.inspect(installationId)}`);
                 const auth = auth_app_1.createAppAuth({
                     appId: inputs.appId,
                     privateKey: inputs.privateKey,
