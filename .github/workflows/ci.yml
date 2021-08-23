@@ -54,12 +54,12 @@ jobs:
         id: download-action
         with:
             name: 'action.yml'
-            path: ./action.yml
+            path: $GITHUB_ACTION_PATH/action.yml
       - uses: actions/download-artifact@v2
         id: download-dist
         with:
             name: 'dist'
-            path: ./dist
+            path: $GITHUB_ACTION_PATH/dist
       - name: Test workflow dispatch
         uses: ./
         with:
