@@ -86,7 +86,7 @@ function run() {
                     }
                 });
                 const response = yield appOctokit.request('GET /app/installations');
-                core.debug(`APP Installations RESPONSE: ${util_1.inspect(response)}`);
+                // core.debug(`APP Installations RESPONSE: ${inspect(response)}`)
                 const data = response.data;
                 core.debug(`APP Installations DATA: ${util_1.inspect(data)}`);
                 let installationId = Number(0);
@@ -114,8 +114,6 @@ function run() {
                 throw new Error('Invalid credentials! You must provide a valid personal access token or valid Application Credentials. Application Credentials requires appId, privateKey, clientId, clientSecret, and installation. Please, review your defined credentials.');
             }
             const octokit = github.getOctokit(token);
-            const installations = yield octokit.request('GET /app/installations');
-            core.debug(`Installations: ${util_1.inspect(installations)}`);
             yield octokit.rest.actions.createWorkflowDispatch({
                 owner: owner,
                 repo: repo,
