@@ -49,7 +49,17 @@ jobs:
     needs: [build]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      #- uses: actions/checkout@v2
+      - uses: actions/download-artifact@v2
+        id: download-action
+        with:
+            name: 'action.yml'
+            path: action.yml
+      - uses: actions/download-artifact@v2
+        id: download-action
+        with:
+            name: 'dist'
+            path: dist
       - name: Test workflow dispatch
         uses: ./
         with:
@@ -66,7 +76,17 @@ jobs:
     needs: [build]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      #- uses: actions/checkout@v2
+      - uses: actions/download-artifact@v2
+        id: download-action
+        with:
+            name: 'action.yml'
+            path: action.yml
+      - uses: actions/download-artifact@v2
+        id: download-action
+        with:
+            name: 'dist'
+            path: dist
       - name: Test remote workflow dispatch
         uses: ./
         with:
