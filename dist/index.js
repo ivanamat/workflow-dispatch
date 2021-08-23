@@ -43,6 +43,7 @@ const util_1 = __nccwpck_require__(1669);
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
+            // Get inputs values
             const inputs = {
                 token: core.getInput('token'),
                 repository: core.getInput('repository'),
@@ -52,68 +53,78 @@ function run() {
                 appId: core.getInput('appId'),
                 privateKey: core.getInput('privateKey'),
                 clientId: core.getInput('clientId'),
-                clientSecret: core.getInput('clientSecret'),
-                installationId: core.getInput('installationId')
+                clientSecret: core.getInput('clientSecret')
             };
+            // Debug inputs
             core.debug(`Inputs: ${util_1.inspect(inputs)}`);
+            // Define owner and repo
             const [owner, repo] = inputs.repository.split('/');
+            /*
+             * Check credentials.
+             * Must be defined a Personal Access Token or App Credentials
+             */
             if (inputs.token === '' &&
                 (inputs.appId === '' ||
                     inputs.privateKey === '' ||
                     inputs.clientId === '' ||
-                    inputs.clientSecret === '' ||
-                    inputs.installationId === '')) {
+                    inputs.clientSecret === '')) {
                 throw new Error('Authorization required!. You must provide a personal access token or Application Credentials. Application Credentials requires appId, privateKey, clientId, clientSecret, and installation.');
             }
+            // Define empty token
             let token = '';
+            // If inputs.token is not empty, set token value with inputs.token
             if (inputs.token) {
                 token = inputs.token;
             }
+            /*
+             * If App Credentials are configured,
+             * retrieve the installation access token
+             */
             if (inputs.appId &&
                 inputs.privateKey &&
                 inputs.clientId &&
-                inputs.clientSecret &&
-                inputs.installationId) {
+                inputs.clientSecret) {
+                // Create octokit instance as app
                 const appOctokit = new rest_1.Octokit({
                     authStrategy: auth_app_1.createAppAuth,
                     auth: {
                         appId: inputs.appId,
                         privateKey: inputs.privateKey
-                        //privateKey: process.env.PRIVATE_KEY,
-                        // optional: this will make appOctokit authenticate as app (JWT)
-                        //           or installation (access token), depending on the request URL
-                        //installationId: 123,
                     }
                 });
+                // Retrieve app installations list
                 const response = yield appOctokit.request('GET /app/installations');
-                // core.debug(`APP Installations RESPONSE: ${inspect(response)}`)
                 const data = response.data;
-                core.debug(`APP Installations DATA: ${util_1.inspect(data)}`);
                 let installationId = Number(0);
+                // Find app installationId by app_id
                 while (data) {
                     if (Number(data[0].app_id) == Number(inputs.appId)) {
                         installationId = Number(data[0].id);
                         break;
                     }
                 }
-                core.debug(`APP Installation ID: ${util_1.inspect(installationId)}`);
+                // Create app authentication
                 const auth = auth_app_1.createAppAuth({
                     appId: inputs.appId,
                     privateKey: inputs.privateKey,
                     clientId: inputs.clientId,
                     clientSecret: inputs.clientSecret
                 });
-                // Retrieve installation access token
+                // Authenticate as app installation and retrieve access token
                 const installationAuthentication = yield auth({
                     type: 'installation',
                     installationId: installationId
                 });
+                // Set access token
                 token = installationAuthentication.token;
             }
+            // Throw error of invalid credentials if token is empty ( or not found ).
             if (token === '') {
                 throw new Error('Invalid credentials! You must provide a valid personal access token or valid Application Credentials. Application Credentials requires appId, privateKey, clientId, clientSecret, and installation. Please, review your defined credentials.');
             }
+            // Create octokit instance as app installation
             const octokit = github.getOctokit(token);
+            // Dispatch workflow
             yield octokit.rest.actions.createWorkflowDispatch({
                 owner: owner,
                 repo: repo,
@@ -124,10 +135,15 @@ function run() {
         }
         catch (error) {
             core.debug(util_1.inspect(error));
+            /*
+             * Throw error if repository not found,
+             * OR token has insufficient permissions
+             */
             if (error.status == 404) {
                 core.setFailed('Repository not found, OR token has insufficient permissions.');
             }
             else {
+                // Throw uncontrolled errors
                 core.setFailed(error.message);
             }
         }
