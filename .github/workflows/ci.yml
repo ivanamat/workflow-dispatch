@@ -28,38 +28,22 @@ jobs:
       - run: npm run format-check
       - run: npm run lint
       - run: npm run test
-      - name: "Commit changes"
+      - name: "Commit and push changes"
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
           git add -A
           (git commit -m "Build index.js") || true
           (git push) || true
-      - uses: actions/upload-artifact@v2
-        with:
-          name: dist
-          path: dist
-      - uses: actions/upload-artifact@v2
-        with:
-          name: action.yml
-          path: action.yml
 
   test-local-dispatch:
     name: Test local dispatch
     needs: [build]
     runs-on: ubuntu-latest
     steps:
-      #- uses: actions/checkout@v2
-      - uses: actions/download-artifact@v2
-        id: download-action
+      - uses: actions/checkout@v2
         with:
-            name: 'action.yml'
-            path: $GITHUB_ACTION_PATH/action.yml
-      - uses: actions/download-artifact@v2
-        id: download-dist
-        with:
-            name: 'dist'
-            path: $GITHUB_ACTION_PATH/dist
+          ref: ${{ github.event.pull_request.head.sha }}
       - name: Test workflow dispatch
         uses: ./
         with:
@@ -76,17 +60,9 @@ jobs:
     needs: [build]
     runs-on: ubuntu-latest
     steps:
-      #- uses: actions/checkout@v2
-      - uses: actions/download-artifact@v2
-        id: download-action
+      - uses: actions/checkout@v2
         with:
-            name: 'action.yml'
-            path: ./action.yml
-      - uses: actions/download-artifact@v2
-        id: download-dist
-        with:
-            name: 'dist'
-            path: ./dist
+          ref: ${{ github.event.pull_request.head.sha }}
       - name: Test remote workflow dispatch
         uses: ./
         with:
