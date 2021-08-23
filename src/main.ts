@@ -82,7 +82,7 @@ async function run(): Promise<void> {
 
       //core.debug(`APP Installation ID: ${installationId}`)
 
-      throw new Error(`EXIT!`)
+      throw new Error(`EXIT NOW!`)
 
       const auth = createAppAuth({
         appId: inputs.appId,
