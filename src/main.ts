@@ -67,7 +67,7 @@ async function run(): Promise<void> {
       const data = response.data
       core.debug(`APP Installations DATA: ${inspect(data)}`)
 
-      let decimal: installationId = 0
+      let installationId: decimal = 0
 
       while (data) {
         if(data[0].app_id == inputs.appId) {
