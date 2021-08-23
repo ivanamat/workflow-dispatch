@@ -88,7 +88,7 @@ function run() {
                 const response = yield appOctokit.request('GET /app/installations');
                 core.debug(`APP Installations RESPONSE: ${util_1.inspect(response)}`);
                 const data = response.data;
-                core.debug(`APP Installations DATA: ${util_1.inspect(response)}`);
+                core.debug(`APP Installations DATA: ${util_1.inspect(data)}`);
                 let installationId = 0;
                 /*
                 while (installations) {
@@ -100,7 +100,6 @@ function run() {
                 */
                 installationId = 123;
                 //core.debug(`APP Installation ID: ${installationId}`)
-                //throw new Error(`APP Installation ID: ${installationId}`)
                 throw new Error(`EXIT!`);
                 const auth = auth_app_1.createAppAuth({
                     appId: inputs.appId,
