@@ -118,10 +118,9 @@ async function run(): Promise<void> {
       ref: inputs.ref,
       inputs: JSON.parse(inputs.workflow_inputs)
     })
-    
+
     // Only for debug purposes
     core.debug(`All successfully done!`)
-    
   } catch (error) {
     core.debug(inspect(error))
 
