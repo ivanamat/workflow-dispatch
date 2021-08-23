@@ -120,7 +120,7 @@ function run() {
             }
             // Throw error of invalid credentials if token is empty ( or not found ).
             if (token === '') {
-                throw new Error('Invalid credentials! You must provide a valid personal access token or valid Application Credentials. Application Credentials requires appId, privateKey, clientId, clientSecret, and installation. Please, review your defined credentials.');
+                throw new Error('Invalid credentials! You must provide a valid personal access token or valid Application Credentials. Application Credentials requires appId, privateKey, clientId, clientSecret, and installation. Please, review your defined credentials');
             }
             // Create octokit instance as app installation
             const octokit = github.getOctokit(token);
@@ -149,6 +149,7 @@ function run() {
         }
     });
 }
+// Execute run function
 run();
 
 
