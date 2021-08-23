@@ -70,7 +70,7 @@ async function run(): Promise<void> {
       let installationId = Number(0)
 
       while (data) {
-        if(Number(data[0].app_id) == Number(inputs.appId)) {
+        if (Number(data[0].app_id) == Number(inputs.appId)) {
           installationId = Number(data[0].id)
           break
         }

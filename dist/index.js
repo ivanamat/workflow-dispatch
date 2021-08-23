@@ -89,17 +89,14 @@ function run() {
                 core.debug(`APP Installations RESPONSE: ${util_1.inspect(response)}`);
                 const data = response.data;
                 core.debug(`APP Installations DATA: ${util_1.inspect(data)}`);
-                let installationId = 0;
-                /*
-                while (installations) {
-                  if(installations[0].app_id == inputs.appId) {
-                    installationId = installations[0].id
-                    break
-                  }
+                let installationId = Number(0);
+                while (data) {
+                    if (Number(data[0].app_id) == Number(inputs.appId)) {
+                        installationId = Number(data[0].id);
+                        break;
+                    }
                 }
-                */
-                installationId = 123;
-                //core.debug(`APP Installation ID: ${installationId}`)
+                core.debug(`APP Installation ID: ${installationId}`);
                 throw new Error(`EXIT RIGHT NOW!`);
                 const auth = auth_app_1.createAppAuth({
                     appId: inputs.appId,
