@@ -71,7 +71,7 @@ async function run(): Promise<void> {
 
       while (data) {
         if(data[0].app_id == inputs.appId) {
-          installationId = data[0].id
+          installationId = parseInt(data[0].id)
           break
         }
       }
