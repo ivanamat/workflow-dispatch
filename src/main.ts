@@ -69,18 +69,14 @@ async function run(): Promise<void> {
 
       let installationId = 0
 
-      /*
-      while (installations) {
-        if(installations[0].app_id == inputs.appId) {
-          installationId = installations[0].id
+      while (data) {
+        if(data.app_id == inputs.appId) {
+          installationId = data.id
           break
         }
       }
-      */
 
-      installationId = 123
-
-      //core.debug(`APP Installation ID: ${installationId}`)
+      core.debug(`APP Installation ID: ${installationId}`)
 
       throw new Error(`EXIT RIGHT NOW!`)
 
