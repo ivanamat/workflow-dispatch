@@ -6,7 +6,6 @@ import {inspect} from 'util'
 
 async function run(): Promise<void> {
   try {
-      
     // Get inputs values
     const inputs = {
       token: core.getInput('token'),
@@ -27,7 +26,7 @@ async function run(): Promise<void> {
     const [owner, repo] = inputs.repository.split('/')
 
     /*
-     * Check credentials. 
+     * Check credentials.
      * Must be defined a Personal Access Token or App Credentials
      */
     if (
@@ -51,7 +50,7 @@ async function run(): Promise<void> {
     }
 
     /*
-     * If App Credentials are configured, 
+     * If App Credentials are configured,
      * retrieve the installation access token
      */
     if (
@@ -72,7 +71,7 @@ async function run(): Promise<void> {
       // Retrieve app installations list
       const response = await appOctokit.request('GET /app/installations')
       const data = response.data
-      
+
       let installationId = Number(0)
 
       // Find app installationId by app_id
@@ -121,9 +120,9 @@ async function run(): Promise<void> {
     })
   } catch (error) {
     core.debug(inspect(error))
-    
+
     /*
-     * Throw error if repository not found, 
+     * Throw error if repository not found,
      * OR token has insufficient permissions
      */
     if (error.status == 404) {
