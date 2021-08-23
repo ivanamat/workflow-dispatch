@@ -62,7 +62,7 @@ async function run(): Promise<void> {
       })
 
       const response = await appOctokit.request('GET /app/installations')
-      core.debug(`APP Installations RESPONSE: ${inspect(response)}`)
+      // core.debug(`APP Installations RESPONSE: ${inspect(response)}`)
 
       const data = response.data
       core.debug(`APP Installations DATA: ${inspect(data)}`)
@@ -101,9 +101,6 @@ async function run(): Promise<void> {
     }
 
     const octokit = github.getOctokit(token)
-
-    const installations = await octokit.request('GET /app/installations')
-    core.debug(`Installations: ${inspect(installations)}`)
 
     await octokit.rest.actions.createWorkflowDispatch({
       owner: owner,
