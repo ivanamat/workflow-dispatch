@@ -13,6 +13,7 @@ async function run(): Promise<void> {
       ref: core.getInput('ref'),
       workflow_id: core.getInput('workflow'),
       workflow_inputs: core.getInput('inputs'),
+      organization: core.getInput('organization'),
       appId: core.getInput('appId'),
       privateKey: core.getInput('privateKey'),
       clientId: core.getInput('clientId'),
@@ -31,7 +32,8 @@ async function run(): Promise<void> {
      */
     if (
       inputs.token === '' &&
-      (inputs.appId === '' ||
+      (inputs.organization === '' ||
+        inputs.appId === '' ||
         inputs.privateKey === '' ||
         inputs.clientId === '' ||
         inputs.clientSecret === '')
@@ -74,11 +76,20 @@ async function run(): Promise<void> {
 
       let installationId = Number(0)
 
-      // Find app installationId by app_id
+      // Find app installationId by organization
+      /*
       while (data) {
-        if (Number(data[0].app_id) == Number(inputs.appId)) {
+        if (Number(data[0].organization) == Number(inputs.organization)) {
           installationId = Number(data[0].id)
           break
+        }
+      }
+      */
+      
+      for (let installation in data) {
+        if (installation.organization == inputs.organization) {
+            installationId = installation[id];
+            break;
         }
       }
 

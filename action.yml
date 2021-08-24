@@ -22,6 +22,10 @@ inputs:
     description: >
         JSON inputs with extra information about the webhook event that your action or worklow may use. Default: {} ( Empty )
     default: '{}'
+  organization:
+    description: >
+        Oorganization or user name. Default: github.actor. This field is optional, required if you don't want to use personal access token and you prefer to use App Credentials.
+    default: ${{ github.actor }}
   appId:
     description: >
         App ID. Default: empty. This field is optional, required if you don't want to use personal access token and you prefer to use App Credentials.
