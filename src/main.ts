@@ -88,7 +88,7 @@ async function run(): Promise<void> {
       if (installationId === 0) {
         throw new Error(
           'The '+input.organization+' has no privileges to access this app. Please, check your credentials and the organization permissions.'
-        }
+        )
       }
       
       // Create app authentication
