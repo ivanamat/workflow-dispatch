@@ -79,7 +79,7 @@ async function run(): Promise<void> {
       for (let i = 0; i < data.length; i++) {
         core.debug(`Installation: ${inspect(data[i])}`)
         if (data[i]!.account!.login === inputs.organization) {
-            installationId = data[i].id
+          installationId = data[i].id
         }
       }
 
