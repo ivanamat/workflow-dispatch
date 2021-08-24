@@ -70,7 +70,7 @@ async function run(): Promise<void> {
       })
 
       // Retrieve app installations list
-      const response = appOctokit.request('GET /app/installations')
+      const response = await appOctokit.request('GET /app/installations')
       const data = response.data
 
       let installationId = Number(0)
@@ -78,7 +78,7 @@ async function run(): Promise<void> {
       // Find app installationId by organization
       for (let i = 0; i < data.length; i++) {
         core.debug(`Installation: ${inspect(data[i])}`)
-        if (data[i].account.login! === inputs.organization) {
+        if (data[i].account.login != null && data[i].account.login === inputs.organization) {
             installationId = data[i].id
         }
       }
