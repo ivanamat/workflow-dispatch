@@ -98,13 +98,13 @@ function run() {
                 const data = response.data;
                 let installationId = Number(0);
                 // Find app installationId by organization
-                for (const installation in data) {
-                    core.debug(`Installation: ${util_1.inspect(installation)}`);
-                    if (installation['account']['login'] == inputs.organization) {
-                        installationId = installation['id'];
-                        break;
-                    }
+                for (let i = 0; i < data.length; i++) {
+                    core.debug(`Installation: ${util_1.inspect(data[i])}`);
+                    //if (data[i].account.login == inputs.organization) {
+                    installationId = data[i].id;
+                    //}
                 }
+                ;
                 // Create app authentication
                 const auth = auth_app_1.createAppAuth({
                     appId: inputs.appId,
