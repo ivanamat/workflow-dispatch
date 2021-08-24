@@ -81,10 +81,10 @@ function run() {
              * If App Credentials are configured,
              * retrieve the installation access token
              */
-            if (inputs.appId &&
-                inputs.privateKey &&
-                inputs.clientId &&
-                inputs.clientSecret) {
+            if (inputs.appId !== '' &&
+                inputs.privateKey !== '' &&
+                inputs.clientId !== '' &&
+                inputs.clientSecret !== '') {
                 // Create octokit instance as app
                 const appOctokit = new rest_1.Octokit({
                     authStrategy: auth_app_1.createAppAuth,
@@ -99,6 +99,7 @@ function run() {
                 let installationId = Number(0);
                 // Find app installationId by organization
                 for (const installation in data) {
+                    core.debug(`Installation: ${util_1.inspect(installation)}`);
                     if (installation['account']['login'] == inputs.organization) {
                         installationId = installation['id'];
                         break;
