@@ -84,6 +84,7 @@ async function run(): Promise<void> {
         }
       }
       
+      core.debug(`Installation ID: ${inspect(installationId)}`)
       if (installationId === 0) {
         throw new Error(
           'The '+inputs.organization+' organization has no privileges to access this app. Please, check your credentials and the organization permissions.'
