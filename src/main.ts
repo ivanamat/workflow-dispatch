@@ -55,10 +55,10 @@ async function run(): Promise<void> {
      * retrieve the installation access token
      */
     if (
-      inputs.appId &&
-      inputs.privateKey &&
-      inputs.clientId &&
-      inputs.clientSecret
+      inputs.appId !== '' &&
+      inputs.privateKey !== '' &&
+      inputs.clientId !== '' &&
+      inputs.clientSecret !== ''
     ) {
       // Create octokit instance as app
       const appOctokit = new Octokit({
@@ -77,6 +77,8 @@ async function run(): Promise<void> {
 
       // Find app installationId by organization
       for (const installation in data) {
+        core.debug(`Installation: ${inspect(installation)}`)
+        
         if (installation['account']['login'] == inputs.organization) {
           installationId = installation['id']
           break
