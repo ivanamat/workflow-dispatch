@@ -81,7 +81,7 @@ async function run(): Promise<void> {
         if (data[i].account.login = inputs.organization) {
             installationId = data[i].id;
         }
-      });
+      };
 
       // Create app authentication
       const auth = createAppAuth({
