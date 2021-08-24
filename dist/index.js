@@ -65,11 +65,10 @@ function run() {
              * Must be defined a Personal Access Token or App Credentials
              */
             if (inputs.token === '' &&
-                (inputs.organization === '' ||
-                    inputs.appId === '' ||
+                (inputs.appId === '' ||
                     inputs.privateKey === '' ||
                     inputs.clientId === '' ||
-                    inputs.clientSecret === '') == true) {
+                    inputs.clientSecret === '')) {
                 throw new Error('Authorization required!. You must provide a personal access token or Application Credentials. Application Credentials requires appId, privateKey, clientId, clientSecret, and installation.');
             }
             // Define empty token
