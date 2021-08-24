@@ -41,6 +41,7 @@ const rest_1 = __nccwpck_require__(5375);
 const auth_app_1 = __nccwpck_require__(7541);
 const util_1 = __nccwpck_require__(1669);
 function run() {
+    var _a, _b;
     return __awaiter(this, void 0, void 0, function* () {
         try {
             // Get inputs values
@@ -100,7 +101,7 @@ function run() {
                 // Find app installationId by organization
                 for (let i = 0; i < data.length; i++) {
                     core.debug(`Installation: ${util_1.inspect(data[i])}`);
-                    if (data[i].account.login === inputs.organization) {
+                    if (((_b = (_a = data[i]) === null || _a === void 0 ? void 0 : _a.account) === null || _b === void 0 ? void 0 : _b.login) === inputs.organization) {
                         installationId = data[i].id;
                     }
                 }
