@@ -87,7 +87,7 @@ async function run(): Promise<void> {
       */
       
       for (let installation in data) {
-        if (installation.organization == inputs.organization) {
+        if (installation[organization] == inputs.organization) {
             installationId = installation[id];
             break;
         }
