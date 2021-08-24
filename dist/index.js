@@ -98,14 +98,6 @@ function run() {
                 const data = response.data;
                 let installationId = Number(0);
                 // Find app installationId by organization
-                /*
-                while (data) {
-                  if (Number(data[0].organization) == Number(inputs.organization)) {
-                    installationId = Number(data[0].id)
-                    break
-                  }
-                }
-                */
                 for (const installation in data) {
                     if (installation['account']['login'] == inputs.organization) {
                         installationId = installation['id'];
