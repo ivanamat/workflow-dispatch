@@ -78,8 +78,8 @@ async function run(): Promise<void> {
       // Find app installationId by organization
       for (let i = 0; i < data.length; i++) {
         core.debug(`Installation: ${inspect(data[i])}`)
-        const org = data[i].account.login
-        if (org == inputs.organization) {
+        const org = <String>data[i].account.login
+        if (<String>data[i].account.login == inputs.organization) {
             installationId = data[i].id
         }
       }
