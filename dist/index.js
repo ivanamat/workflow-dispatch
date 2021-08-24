@@ -108,7 +108,9 @@ function run() {
                 }
                 core.debug(`Installation ID: ${util_1.inspect(installationId)}`);
                 if (installationId === 0) {
-                    throw new Error('The ' + inputs.organization + ' organization has no privileges to access this app. Please, check your credentials and the organization permissions.');
+                    throw new Error('The ' +
+                        inputs.organization +
+                        ' organization has no privileges to access this app. Please, check your credentials and the organization permissions.');
                 }
                 // Create app authentication
                 const auth = auth_app_1.createAppAuth({
