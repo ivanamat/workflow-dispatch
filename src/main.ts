@@ -76,14 +76,10 @@ async function run(): Promise<void> {
       let installationId = Number(0)
 
       // Find app installationId by organization
-      for (const installation in data) {
-        core.debug(`Installation: ${inspect(installation)}`)
-        
-        if (installation['account']['login'] == inputs.organization) {
-          installationId = installation['id']
-          break
-        }
-      }
+      data.forEach( (element) => {
+        core.debug(`Installation: ${inspect(element)}`)
+        element.account.id = inputs.organization;
+      });
 
       // Create app authentication
       const auth = createAppAuth({
