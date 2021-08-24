@@ -52,7 +52,6 @@ jobs:
           privateKey: ${{ secrets.APP_RSA_PRIVATE_KEY }}
           clientId: ${{ secrets.APP_CLIENT_ID }}
           clientSecret: ${{ secrets.APP_CLIENT_SECRET }}
-          installationId: ${{ secrets.APP_INSTALLATION_ID }}
           
   test-remote-dispatch:
     name: Test remote dispatch`
