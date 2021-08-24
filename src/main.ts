@@ -32,11 +32,10 @@ async function run(): Promise<void> {
      */
     if (
       inputs.token === '' &&
-      (inputs.organization === '' ||
-        inputs.appId === '' ||
+      (inputs.appId === '' ||
         inputs.privateKey === '' ||
         inputs.clientId === '' ||
-        inputs.clientSecret === '') == true
+        inputs.clientSecret === '')
     ) {
       throw new Error(
         'Authorization required!. You must provide a personal access token or Application Credentials. Application Credentials requires appId, privateKey, clientId, clientSecret, and installation.'
