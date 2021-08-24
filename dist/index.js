@@ -103,7 +103,12 @@ function run() {
                     core.debug(`Installation: ${util_1.inspect(data[i])}`);
                     if (((_b = (_a = data[i]) === null || _a === void 0 ? void 0 : _a.account) === null || _b === void 0 ? void 0 : _b.login) === inputs.organization) {
                         installationId = data[i].id;
+                        break;
                     }
+                }
+                core.debug(`Installation ID: ${util_1.inspect(installationId)}`);
+                if (installationId === 0) {
+                    throw new Error('The ' + inputs.organization + ' organization has no privileges to access this app. Please, check your credentials and the organization permissions.');
                 }
                 // Create app authentication
                 const auth = auth_app_1.createAppAuth({
