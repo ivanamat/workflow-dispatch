@@ -80,9 +80,17 @@ async function run(): Promise<void> {
         core.debug(`Installation: ${inspect(data[i])}`)
         if (data[i]?.account?.login === inputs.organization) {
           installationId = data[i].id
+          break;
         }
       }
-
+      
+->    // Comprobar aquí que el installationid no es 0
+      if (installationId === 0) {
+        throw new Error(
+          'The '+input.organization+' has no privileges to access this app. Please, check your credentials and the organization permissions.'
+        }
+      }
+      
       // Create app authentication
       const auth = createAppAuth({
         appId: inputs.appId,
