@@ -78,7 +78,7 @@ async function run(): Promise<void> {
       // Find app installationId by organization
       data.forEach( (element) => {
         core.debug(`Installation: ${inspect(element)}`)
-        element.account.id = inputs.organization;
+        element.account.login = inputs.organization;
       });
 
       // Create app authentication
