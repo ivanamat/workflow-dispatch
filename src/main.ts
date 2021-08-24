@@ -85,11 +85,11 @@ async function run(): Promise<void> {
         }
       }
       */
-      
+
       for (const installation in data) {
         if (installation['account']['login'] == inputs.organization) {
-            installationId = installation['id'];
-            break;
+          installationId = installation['id']
+          break
         }
       }
 
